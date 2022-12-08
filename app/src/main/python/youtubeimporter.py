@@ -23,5 +23,4 @@ def main(youtube_link,media_path):
     new_file = base + ".mp3"
     os.rename(out_file, new_file)
 
-    #return video.title + " has been successfully downloaded."
-    return media_path + " has been successfully downloaded."
+    return video.title + " has been successfully downloaded."
