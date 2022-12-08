@@ -18,6 +18,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
 import android.view.View;
+import android.webkit.URLUtil;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -35,7 +36,8 @@ public class MainActivity extends AppCompatActivity {
     public static final int REQUEST_WRITE_STORAGE = 140;
     //public  String storeDir = getFilesDir().getAbsolutePath()+"/Music";
     public  String storeDir = "";
-
+    public static final int URL_LENGTH_LIMIT = 200;
+    public static final String DEFAULT_ERROR_MESSAGE = "Download failed, verify your input or network";
     Button dbutton;
     TextView status;
     TextView dropPath;
@@ -68,11 +70,9 @@ public class MainActivity extends AppCompatActivity {
                 String youtube_link = urlText.getText().toString();//"https://www.youtube.com/watch?v=Sy2poz1__14";
                 String s= "";
                 if(validateModel((youtube_link)))
-                    if(obj == null)
-                        s="Error";
-                    else
                     s= obj.callAttr("main", youtube_link,storeDir).toString();
-                String path = s.contains("successfully") ? "Check in "+storeDir : "Error in the input or download action";
+
+                String path = s.contains("successfully") ? "Check in "+storeDir : DEFAULT_ERROR_MESSAGE;
                 status.setText(s);
                 dropPath.setText(path);
                 Log.v("EditText", youtube_link);
@@ -80,9 +80,8 @@ public class MainActivity extends AppCompatActivity {
         });
     }
     public boolean validateModel(String in){
-        //input is not url
-        //input is empty
-        //input is more than 200 characters
+        if(!URLUtil.isValidUrl(in) || !(in != null && !in.trim().isEmpty()) || in.length()>URL_LENGTH_LIMIT)
+            return false;
         return true;
     }
 
