@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
         Python py = Python.getInstance();
         PyObject obj = py.getModule("youtubeimporter");
         storeDir = /*getApplicationContext().getExternalFilesDir(DIRECTORY_MUSIC).*/
-         Environment.getExternalStoragePublicDirectory(DIRECTORY_DOWNLOADS).getAbsolutePath()+"/youtube_music";
+         Environment.getExternalStoragePublicDirectory(DIRECTORY_DOWNLOADS).getAbsolutePath();//+"/youtube_music";
 
         dbutton.setOnClickListener(new View.OnClickListener() {
             @Override
