@@ -35,7 +35,7 @@ import java.io.IOException;
 public class MainActivity extends AppCompatActivity {
     public static final int REQUEST_WRITE_STORAGE = 140;
     //public  String storeDir = getFilesDir().getAbsolutePath()+"/Music";
-    public  String storeDir = "";
+    public String storeDir;
     public static final int URL_LENGTH_LIMIT = 200;
     public static final String DEFAULT_ERROR_MESSAGE = "Download failed, verify your input or network";
     Button dbutton;
@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
         Python py = Python.getInstance();
         PyObject obj = py.getModule("youtubeimporter");
         storeDir = /*getApplicationContext().getExternalFilesDir(DIRECTORY_MUSIC).*/
-                Environment.getExternalStoragePublicDirectory(DIRECTORY_DOWNLOADS).getAbsolutePath();
+         Environment.getExternalStoragePublicDirectory(DIRECTORY_DOWNLOADS).getAbsolutePath()+"/youtube_music";
 
         dbutton.setOnClickListener(new View.OnClickListener() {
             @Override
